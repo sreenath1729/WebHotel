@@ -1,0 +1,84 @@
+﻿@model WebHotel.Models.HotelViewModels.RoomSearch
+@{
+    ViewData["Title"] = "Search Rooms";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="SearchRooms">
+            <div class="form-group">
+                <label asp-for="BedCount" class="control-label">Number of Beds Required</label>
+                <select asp-for="BedCount" class="form-control">
+                    <option value="1">1 bed</option>
+                    <option value="2">2 beds</option>
+                    <option value="3">3 beds</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CheckIn" class="control-label"></label>
+                <input asp-for="CheckIn" class="form-control" />
+                <span asp-validation-for="CheckIn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CheckOut" class="control-label"></label>
+                <input asp-for="CheckOut" class="form-control" />
+                <span asp-validation-for="CheckOut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search Rooms" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@* Check this is invoked by 'get' or 'post' version of PeopleDiff().
+        If 'post' version, display the results.*@
+    @if (Model != null)
+    {
+        <div>
+            <h2>Available Rooms</h2>
+            
+            @if (ViewBag.Results.Count == 0)
+            {
+                <h4>No Results.</h4>
+            }
+            else
+            {
+                <table class="table">
+                    <!-- .table is a Bootstrap class giving table styles -->
+                    <tr>
+                        <th>
+                            Room ID
+                        </th>
+                        <th>
+                            Level
+                        </th>
+                        <th>
+                            Bed Count
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                    </tr>
+
+                    @foreach (var item in ViewBag.Results)
+                    {
+                    <tr>
+                        <td>
+                            @item.ID
+                        </td>
+                        <td>
+                            @item.Level
+                        </td>
+                        <td>
+                            @item.BedCount
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                    </tr>
+                    }
+                </table>
+            }
+        </div>
+    }

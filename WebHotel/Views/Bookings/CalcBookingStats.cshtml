@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebHotel.Models.HotelViewModels.BookingStatistic>
+@{
+    ViewData["Title"] = "Booking Statistics";
+}
+
+<h2>Booking Statistics</h2>
+
+<br />
+<h2>Customer distribution with respect to postcodes</h2>
+<div>
+    <table class="table">
+        @* .table is a Bootstrap class giving table styles *@
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.PostCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.CustomerCount)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerCount)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<br />
+<h2>Booking distribution with respect to rooms</h2>
+<div>
+    <table class="table">
+        @* .table is a Bootstrap class giving table styles *@
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.RoomID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.BookingCount)
+            </th>
+        </tr>
+
+        @foreach (var item in ViewBag.TableB)
+        {
+            <tr>
+                <td>
+                    @item.RoomID
+                </td>
+                <td>
+                    @item.BookingCount
+                </td>
+            </tr>
+        }
+    </table>
+</div>
